@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using MarketCore.Classes;
 
@@ -26,27 +27,22 @@ namespace MarkerService
             Storehouses.Remove(storehouse);
 
         }
-        public void AddProduct(Storehouse storehouse,ProductVariation productVariation, int count)
+        public void AddProduct(Storehouse storehouse,ProductVariation productVariation)
         {
-            if (storehouse.Products.ContainsKey(productVariation))
+            if (storehouse.Products.Contains(productVariation.BaseProduct))
             {
-                storehouse.Products[productVariation] += count;
-            }
-            else
-            {
-                storehouse.Products.Add(productVariation,count);
+                productVariation.BaseProduct.ProductVariations.Add(productVariation);
             }
         }
 
-        public List<Product> GetProduct(Product product, int count)
+        public List<Product> GetAllProducts()
         {
-            if (!Products.ContainsKey(product)) return null;
-            if (Products[product] <= 0) return null;
-            if (Products[product] < count)
+            var listProducts=new List<Product>();
+            foreach (var storehouse in Storehouses)
             {
-
+                listProducts.AddRange(storehouse.Products);
             }
-            return null;
+            return listProducts;
         }
     }
 }
