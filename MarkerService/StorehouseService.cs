@@ -27,11 +27,18 @@ namespace MarkerService
             Storehouses.Remove(storehouse);
 
         }
-        public void AddProduct(Storehouse storehouse,ProductVariation productVariation)
+        //public void AddProductVariation(Storehouse storehouse,ProductVariation productVariation)
+        //{
+        //    if (storehouse.Products.Contains(productVariation.BaseProduct))
+        //    {
+        //        productVariation.BaseProduct.ProductVariations.Add(productVariation);
+        //    }
+        //}
+        public void AddProduct(Storehouse storehouse, Product product)
         {
-            if (storehouse.Products.Contains(productVariation.BaseProduct))
+            if (!storehouse.Products.Contains(product))
             {
-                productVariation.BaseProduct.ProductVariations.Add(productVariation);
+                storehouse.Products.Add(product);
             }
         }
 

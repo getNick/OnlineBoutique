@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MarketCore.EmunsAndConst
 {
-    enum OderStatusEnum
+    public enum OrderStatusEnum
     {
         Basket,
         WaitConfirm,

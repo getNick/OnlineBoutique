@@ -6,9 +6,10 @@ using MarketCore.EmunsAndConst;
 
 namespace MarketCore.Classes
 {
-    public struct ColorVariation
+    public class ColorVariation
     {
-        public Color Color { get; set; }
-        public List<String> ImageURLs { get; set; }
+        public int Id { get; set; }
+        public FilePath ColorImageURLs { get; set; }
+        public List<FilePath> ImageURLs { get; set; }
     }
 }

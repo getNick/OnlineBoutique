@@ -1,0 +1,22 @@
+﻿@model List<MarketCore.Classes.Product>
+
+    @{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+    <h2>Вся одежда</h2>
+    @{
+    foreach (var product in Model)
+    {
+    <div class="col-md-4">
+        <div align="center">
+            <a href='@Url.Action("Index", "Home")'>
+                <img src="@Url.Content("~/images/"+@product.ImageUrl.Path)" alt="Женская одежда" class="product_Image" />
+            </a>
+        </div>
+        <p class="product_Name">@product.Name</p>
+        <p class="product_Price">@product.Price</p>
+    </div>
+    }
+    }

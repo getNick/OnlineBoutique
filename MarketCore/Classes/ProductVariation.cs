@@ -6,6 +6,7 @@ namespace MarketCore.Classes
 {
     public class ProductVariation
     {
+        public int Id { get; set; }
         public Product BaseProduct { get; set; }
         public ColorVariation ColorVariation { get; set; }
         public SizeVariation SizeVariation { get; set; }
