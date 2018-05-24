@@ -9,7 +9,7 @@ namespace MarketCore.Classes
     public class ColorVariation
     {
         public int Id { get; set; }
-        public FilePath ColorImageURLs { get; set; }
+        public string Color{ get; set; }
         public List<FilePath> ImageURLs { get; set; }
     }
 }

@@ -1,0 +1,44 @@
+﻿@model MarketCore.Classes.ProductVariation
+@{
+    ViewData["Title"] = "ProductVariation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="form-product-name">@Model.BaseProduct.Name</h2>
+<div class="row">
+    <div class="col-lg-5">
+        <p>@Model.BaseProduct.Description</p>
+    </div>
+    <div class="col-lg-7">
+        <div align="center">
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    @for (int i = 1; i < Model.ColorVariation.ImageURLs.Count; i++)
+                    {
+                        <li data-target="#myCarousel" data-slide-to="@i"></li>
+                    }
+                </ol>
+                <div class="carousel-inner" role="listbox">
+                    @foreach (var image in Model.ColorVariation.ImageURLs)
+                    {
+                        <div class="item">
+                            <img src="@Url.Content("~/images/products/" + @image)" class="product_Image" />
+                        </div>
+                    }
+                </div>
+                <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

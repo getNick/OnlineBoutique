@@ -10,6 +10,7 @@ namespace OnlineBoutique.Data
         public DbSet<Order> Orders { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Storehouse> Storehouses { get; set; }
+        public DbSet<FilePath> Images { get; set; }
 
         public BoutiqueContex(DbContextOptions<BoutiqueContex> options)
             : base(options)

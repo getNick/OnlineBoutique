@@ -46,3 +46,14 @@
     text-align: center;
     color: gray;
 }
+.form-create-pv {
+    
+}
+.form-product-name {
+    text-align: left;
+    font-size: 32px;
+}
+.btn_save {
+    
+    margin-left: 10px;
+}

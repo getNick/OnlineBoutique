@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MarketCore.Classes;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -35,10 +36,11 @@ namespace OnlineBoutique
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+            //services.AddSingleton<ImageTempStore>();
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
-
+            
             services.AddMvc();
         }
 

@@ -13,5 +13,6 @@ namespace MarketCore.Classes
         {
             Path = path;
         }
+        public FilePath() { }
     }
 }

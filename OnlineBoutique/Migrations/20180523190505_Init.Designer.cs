@@ -12,8 +12,8 @@ using System;
 namespace OnlineBoutique.Migrations
 {
     [DbContext(typeof(BoutiqueContex))]
-    [Migration("20180518205837_FirstMigration")]
-    partial class FirstMigration
+    [Migration("20180523190505_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -33,7 +33,7 @@ namespace OnlineBoutique.Migrations
 
                     b.Property<int>("Season");
 
-                    b.Property<int>("Year");
+                    b.Property<int?>("Year");
 
                     b.HasKey("Id");
 
@@ -45,11 +45,9 @@ namespace OnlineBoutique.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("ColorImageURLsId");
+                    b.Property<string>("Color");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ColorImageURLsId");
 
                     b.ToTable("ColorVariation");
                 });
@@ -67,7 +65,7 @@ namespace OnlineBoutique.Migrations
 
                     b.HasIndex("ColorVariationId");
 
-                    b.ToTable("FilePath");
+                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("MarketCore.Classes.Order", b =>
@@ -204,13 +202,6 @@ namespace OnlineBoutique.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("MarketCore.Classes.ColorVariation", b =>
-                {
-                    b.HasOne("MarketCore.Classes.FilePath", "ColorImageURLs")
-                        .WithMany()
-                        .HasForeignKey("ColorImageURLsId");
                 });
 
             modelBuilder.Entity("MarketCore.Classes.FilePath", b =>

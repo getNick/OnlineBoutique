@@ -44,11 +44,9 @@ namespace OnlineBoutique.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("ColorImageURLsId");
+                    b.Property<string>("Color");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ColorImageURLsId");
 
                     b.ToTable("ColorVariation");
                 });
@@ -66,7 +64,7 @@ namespace OnlineBoutique.Migrations
 
                     b.HasIndex("ColorVariationId");
 
-                    b.ToTable("FilePath");
+                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("MarketCore.Classes.Order", b =>
@@ -203,13 +201,6 @@ namespace OnlineBoutique.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("MarketCore.Classes.ColorVariation", b =>
-                {
-                    b.HasOne("MarketCore.Classes.FilePath", "ColorImageURLs")
-                        .WithMany()
-                        .HasForeignKey("ColorImageURLsId");
                 });
 
             modelBuilder.Entity("MarketCore.Classes.FilePath", b =>

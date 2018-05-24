@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace OnlineBoutique.Migrations
 {
-    public partial class FirstMigration : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -18,11 +18,24 @@ namespace OnlineBoutique.Migrations
                     DressType = table.Column<int>(nullable: false),
                     Gender = table.Column<int>(nullable: false),
                     Season = table.Column<int>(nullable: false),
-                    Year = table.Column<int>(nullable: false)
+                    Year = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Category", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ColorVariation",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Color = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ColorVariation", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -67,6 +80,26 @@ namespace OnlineBoutique.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Images",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ColorVariationId = table.Column<int>(nullable: true),
+                    Path = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Images", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Images_ColorVariation_ColorVariationId",
+                        column: x => x.ColorVariationId,
+                        principalTable: "ColorVariation",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -132,42 +165,15 @@ namespace OnlineBoutique.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
+                        name: "FK_Products_Images_ImageUrlId",
+                        column: x => x.ImageUrlId,
+                        principalTable: "Images",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_Products_Storehouses_StorehouseId",
                         column: x => x.StorehouseId,
                         principalTable: "Storehouses",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "FilePath",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ColorVariationId = table.Column<int>(nullable: true),
-                    Path = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_FilePath", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ColorVariation",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ColorImageURLsId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ColorVariation", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ColorVariation_FilePath_ColorImageURLsId",
-                        column: x => x.ColorImageURLsId,
-                        principalTable: "FilePath",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -215,13 +221,8 @@ namespace OnlineBoutique.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ColorVariation_ColorImageURLsId",
-                table: "ColorVariation",
-                column: "ColorImageURLsId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_FilePath_ColorVariationId",
-                table: "FilePath",
+                name: "IX_Images_ColorVariationId",
+                table: "Images",
                 column: "ColorVariationId");
 
             migrationBuilder.CreateIndex(
@@ -268,30 +269,10 @@ namespace OnlineBoutique.Migrations
                 name: "IX_Size_SizeVariationId",
                 table: "Size",
                 column: "SizeVariationId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Products_FilePath_ImageUrlId",
-                table: "Products",
-                column: "ImageUrlId",
-                principalTable: "FilePath",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_FilePath_ColorVariation_ColorVariationId",
-                table: "FilePath",
-                column: "ColorVariationId",
-                principalTable: "ColorVariation",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_ColorVariation_FilePath_ColorImageURLsId",
-                table: "ColorVariation");
-
             migrationBuilder.DropTable(
                 name: "ProductVariations");
 
@@ -311,13 +292,13 @@ namespace OnlineBoutique.Migrations
                 name: "Category");
 
             migrationBuilder.DropTable(
+                name: "Images");
+
+            migrationBuilder.DropTable(
                 name: "Storehouses");
 
             migrationBuilder.DropTable(
                 name: "Users");
-
-            migrationBuilder.DropTable(
-                name: "FilePath");
 
             migrationBuilder.DropTable(
                 name: "ColorVariation");

@@ -13,13 +13,29 @@ namespace MarketCore.Classes
         [NotMapped]
         public double Price
         {
-            get { return 0; }
+            get
+            {
+                if ((ProductVariations!=null)&&(ProductVariations.Count > 0))
+                {
+                    return ProductVariations.Min(x => x.Price);
+                }
+                return 0;
+            }
         }
         [NotMapped]
         public int Count
         {
-            get { return 0; }
+            get
+            {
+                if ((ProductVariations != null) && (ProductVariations.Count > 0))
+                {
+                    return ProductVariations.Sum(x => x.CountInStore);
+                }
+                return 0;
+            }
         }
         public Category Category { get; set; }
+        [NotMapped]
+        public List<ProductVariation> ProductVariations { get; set; }
     }
 }
