@@ -1,0 +1,21 @@
+﻿@model OnlineBoutique.Models.CatalogViewModels.SkirtListViewModel
+@{
+    ViewData["Title"] = "SkirtPage";
+    Layout = "~/Views/Catalog/_ProductLayout.cshtml";
+}
+
+@section Filters
+{>
+    <label for="usr">Цена:</label>
+    <div class="input-group" id="usr">
+        <span class="input-group-addon">От</span>
+        <input type="text" name="priceFrom" value="@Model.PriceFrom" class="form-control">
+        <span class="input-group-addon">До</span>
+        <input type="text" name="priceTO" value="@Model.PriceTo" class="form-control">
+    </div>
+
+
+
+
+}
+

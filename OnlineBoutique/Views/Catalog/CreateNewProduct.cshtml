@@ -1,24 +1,57 @@
 ﻿@using MarketCore.Classes
+@using MarketCore.EmunsAndConst
 @model int
 @{
     ViewData["Title"] = "CreateNewProduct";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>CreateNewProduct</h2>
-<form asp-controller="Catalog" asp-action="Upload" method="post" class="dropzone" asp-antiforgery="false"
-      enctype="multipart/form-data">
-    <input type="text" name="productId" value="@Model" hidden>
-</form>
+<h2>Новый продукт</h2>
 <form asp-controller="Catalog" asp-action="NewProduct" method="post">
     <input type="text" name="productId" value="@Model" hidden>
-    <div class="form-group col-lg-6">
+    <div class="form-group col-lg-4">
         <label for="usr">Название:</label>
         <input type="text" name="name" class="form-control" id="usr">
     </div>
-    <div class="form-group col-lg-6">
+    <div class="form-group col-lg-4">
+        <label for="usr">Бренд:</label>
+        <input type="text" name="brand" class="form-control" id="usr">
+    </div>
+    <div class="form-group col-lg-4">
         <label for="usr">Описание:</label>
         <input type="text" name="description" class="form-control" id="usr">
+    </div>
+    <div class="form-group col-lg-3">
+        <label for="sel1">Пол:</label>
+        <select class="form-control" name="gender" id="sel1">
+            <option value="@GenderCategoriesEnum.Woman">Женский</option>
+            <option value="@GenderCategoriesEnum.Man">Мужской</option>
+        </select>
+    </div>
+    <div class="form-group col-lg-3">
+        <label for="sel1">Стиль:</label>
+        <select class="form-control" name="style" id="sel1">
+            <option value="@StyleEnum.Chic">Нарядный</option>
+            <option value="@StyleEnum.Office">Оффисный</option>
+            <option value="@StyleEnum.Casual">Повседневный</option>
+            <option value="@StyleEnum.Sport">Спортивный</option>
+            <option value="@StyleEnum.Romantic">Романтический</option>
+        </select>
+    </div>
+    <div class="form-group col-lg-3">
+        <label for="sel1">Тип одежды:</label>
+        <select class="form-control" name="dressType" id="sel1">
+            <option value="@DressTypeEnum.DressAndSkirt">Платья и юбки</option>
+            <option value="@DressTypeEnum.Tshirt">Футболки</option>
+            <option value="@DressTypeEnum.Shirt">Рубашки</option>
+            <option value="@DressTypeEnum.Sweater">Свитера</option>
+            <option value="@DressTypeEnum.JeansAndTrousers">Джинсы и брюки</option>
+            <option value="@DressTypeEnum.Outerwear">Верхняя одежда</option>
+        </select>
+    </div>
+    <div class="form-group col-lg-3">
+        <label for="usr">Год:</label>
+        <input type="text" name="year" class="form-control" id="usr">
     </div>
     <div class="row">
         <div class="col-lg-12">

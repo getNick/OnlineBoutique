@@ -1,0 +1,83 @@
+﻿@using MarketCore.EmunsAndConst
+@model MarketCore.Classes.ProductVariation
+@{
+    ViewData["Title"] = "CreateTshirt";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Новая вариация продукта @Model.BaseProduct.Brand @Model.BaseProduct.Name</h2>
+
+<form asp-controller="Catalog" asp-action="Upload" method="post" class="dropzone" asp-antiforgery="false"
+      enctype="multipart/form-data">
+    <input type="text" name="productVariationId" value="@Model.ProductVariationId" hidden>
+</form>
+<form asp-controller="Catalog" asp-action="NewProductVariation" method="post">
+    <input type="text" name="productVariationId" value="@Model.ProductVariationId" hidden>
+    <div class="form-group col-lg-6">
+        <label for="usr">Цвет:</label>
+        <input type="text" name="color" class="form-control" id="usr">
+    </div>
+    <div class="form-group col-lg-6">
+        <label for="sel1">Размер:</label>
+        <select class="form-control" name="namedSize" id="sel1">
+            <option value="@NamedSizeEnum.XS">XS</option>
+            <option value="@NamedSizeEnum.S">S</option>
+            <option value="@NamedSizeEnum.M">M</option>
+            <option value="@NamedSizeEnum.L">L</option>
+            <option value="@NamedSizeEnum.XL">XL</option>
+            <option value="@NamedSizeEnum.XXL">XXL</option>
+        </select>
+    </div>
+    <div class="form-group col-lg-4">
+        <label for="usr">Обьем грудной клетки:</label>
+        <div class="input-group" id="usr">
+            <span class="input-group-addon">Min</span>
+            <input type="text" name="breastSize" class="form-control">
+            <span class="input-group-addon">Max</span>
+            <input type="text" name="breastMaxSize" class="form-control">
+        </div>
+    </div>
+    <div class="form-group col-lg-4">
+        <label for="usr">Длина рукава:</label>
+        <input type="text" name="girthHandsSize" class="form-control" id="usr">
+    </div>
+    <div class="form-group col-lg-4">
+        <label for="usr">Длина изделия:</label>
+        <input type="text" name="height" class="form-control" id="usr">
+    </div>
+    <div class="form-group col-lg-4">
+        <label for="usr">Taлия:</label>
+        <div class="input-group" id="usr">
+            <span class="input-group-addon">Min</span>
+            <input type="text" name="waistSize" class="form-control">
+            <span class="input-group-addon">Max</span>
+            <input type="text" name="waistMaxSize" class="form-control">
+        </div>
+    </div>
+    <div class="form-group col-lg-4">
+        <label for="usr">Ширина плеч:</label>
+        <div class="input-group" id="usr">
+            <span class="input-group-addon">Min</span>
+            <input type="text" name="widthOfTheShoulders" class="form-control">
+            <span class="input-group-addon">Max</span>
+            <input type="text" name="widthOfTheShouldersMax" class="form-control">
+        </div>
+    </div>
+    <div class="form-group col-lg-4">
+        <label for="usr">Цена:</label>
+        <input type="text" name="price" class="form-control" id="usr">
+    </div>
+    <div class="form-group col-lg-4">
+        <label for="usr">Количество на складе:</label>
+        <input type="text" name="countInStore" class="form-control" id="usr">
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="text-right">
+                <div style="margin-right: 15px">
+                    <button type="submit" class="btn btn-primary btn-lg">Создать</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>

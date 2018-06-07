@@ -1,0 +1,32 @@
+﻿@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+
+}
+
+<div>
+    <hr />
+    <div class="row">
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    @RenderSection("Filters")
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#">Оценка посадки</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Цена
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">От дешевых к дорогим</a></li>
+                        <li><a href="#">От дорогих к дешевым</a></li>
+                    </ul>
+                </li>
+            </ul>
+            @RenderBody()
+        </div>
+    </div>
+</div>
+

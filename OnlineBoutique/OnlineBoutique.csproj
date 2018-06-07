@@ -7,6 +7,8 @@
 
 
   <ItemGroup>
+    <PackageReference Include="bootstrap" Version="4.1.1" />
+    <PackageReference Include="bootstrap-toggle.less" Version="2.2.0.1" />
     <PackageReference Include="dropzone" Version="4.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.1" PrivateAssets="All" />
@@ -20,10 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MarkerService\MarkerService.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <Folder Include="Migrations\ApplicationDb\" />
     <Folder Include="wwwroot\images\products\" />
   </ItemGroup>
 

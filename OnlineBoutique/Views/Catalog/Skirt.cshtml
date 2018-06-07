@@ -1,0 +1,141 @@
+﻿@model OnlineBoutique.Models.CatalogViewModels.SkirtListViewModel
+@{
+    ViewData["Title"] = "Skirts";
+    Layout = "~/Views/Catalog/_ProductLayout.cshtml";
+
+}
+@section Filters
+    {
+    <form asp-controller="Catalog" asp-action="Skirt" method="post">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-theme.css" />
+        <link rel="stylesheet" href="css/site.css" />
+        <link rel="stylesheet" href="~/css/bootstrap-slider.css" />
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/bootstrap-slider.js"></script>
+        <label for="usr">Цена:</label>
+        <div class="input-group" id="usr">
+            <span class="input-group-addon">От</span>
+            <input type="text" name="priceFrom" value="@Model.PriceFrom" class="form-control">
+            <span class="input-group-addon">До</span>
+            <input type="text" name="priceTO" value="@Model.PriceTo" class="form-control">
+        </div>
+        <br />
+        <div class="panel panel-default">
+            <div class="panel-heading">Длина:</div>
+            <div class="panel-body">
+                <div class="checkbox">
+                    <ul>
+                        @foreach (var length in @Model.AllLength)
+                        {
+                            if (Model.SelectedLength.Contains(length))
+                            {
+                                <li><input type="checkbox" value="@length" id="lengths" name="lengths" checked /> @length</li>
+                            }
+                            else
+                            {
+                                <li><input type="checkbox" value="@length" id="lengths" name="lengths" /> @length</li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="panel panel-default">
+            <div class="panel-heading">Цвет</div>
+            <div class="panel-body">
+                <div class="checkbox">
+                    <ul>
+                        @foreach (var color in @Model.AllColors)
+                        {
+                            if (Model.SelectedColors.Contains(color))
+                            {
+                                <li><input type="checkbox" value="@color" id="colors" name="colors" checked /> @color</li>
+                            }
+                            else
+                            {
+                                <li><input type="checkbox" value="@color" id="colors" name="colors" /> @color</li>
+                            }
+
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="panel panel-default">
+            <div class="panel-heading">Бренд</div>
+            <div class="panel-body">
+                <div class="checkbox">
+                    <ul>
+                        @foreach (var brand in @Model.AllBrand)
+                        {
+                            if (Model.SelectedBrand.Contains(brand))
+                            {
+                                <li><input type="checkbox" value="@brand" id="brands" name="brands" checked /> @brand</li>
+                            }
+                            else
+                            {
+                                <li><input type="checkbox" value="@brand" id="brands" name="brands" /> @brand</li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="form-group" align="center" style="margin: 15px">
+            <div class="checkbox">
+                <input type="checkbox" value="true" name="sizeForMe" />Отображать только подходящие для меня
+                <input type="hidden" value="false" name="sizeForMe" />
+            </div>
+        </div>
+        <div class="container">
+            <input id="ex1" name="minFit" data-slider-id='ex1Slider' data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="@Model.MinFit" />
+            <script type="text/javascript">
+                // With JQuery
+                $('#ex1').slider({
+                    formatter: function (value) {
+                        return 'Не меньше чем: ' + value;
+                    }
+                });
+
+            </script>
+            <style type="text/css">
+                #ex1Slider .slider-selection {
+                    background: #BABABA;
+                }
+            </style>
+        </div>
+        <br />
+        <div class="text-right">
+            <div style="margin-right: 15px">
+                <button type="submit" class="btn btn-primary btn-lg">Поиск</button>
+            </div>
+        </div>
+    </form>
+
+}
+@{
+    foreach (var product in @Model.Products)
+    {
+        <div class="col-md-4">
+            <div align="center">
+                <a href='@Url.Action("ProductVariation", "Catalog",new{productVariationId=product.ProductVariationId})'>
+                    <img src="@Url.Content("~/images/products/"+@product.ColorVariation.ImageURLs.FirstOrDefault().Path)" alt="Женская одежда" class="product_Image" />
+                </a>
+            </div>
+            <p class="product_Name">@product.BaseProduct.Brand @product.BaseProduct.Name</p>
+            @if (Model.SizeForMe)
+            {
+                <div align="center">
+                    <p>Подходит на @product.SizeVariation.Max(x => x.Rating)/10</p>
+                </div>
+            }
+            <p class="product_Price">@product.Price грн</p>
+        </div>
+    }
+}
+

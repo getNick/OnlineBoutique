@@ -1,22 +1,33 @@
-﻿@model List<MarketCore.Classes.Product>
+﻿@using MarketCore.EmunsAndConst
+@model List<MarketCore.Classes.ProductVariation>
 
     @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Catalog/_ProductLayout.cshtml";
     }
-
-    <h2>Вся одежда</h2>
+@section Filters
+{
+    <p>Виберите категорию</p>
+    <ul class="nav nav-pills nav-stacked">
+        <li><a href='@Url.Action("Skirt", "Catalog")'>Платья и юбки </a></li>
+        <li><a href='@Url.Action("Index", "Home")'>Футболки </a></li>
+        <li><a href='@Url.Action("Index", "Home")'>Джинсы и брюки </a></li>
+        <li><a href='@Url.Action("Index", "Home")'>Свитера </a></li>
+        <li><a href='@Url.Action("Index", "Home")'>Блузки и рубашки </a></li>
+        <li><a href='@Url.Action("Index", "Home")'>Верхняя одежда </a></li>
+    </ul>  
+}
     @{
     foreach (var product in Model)
     {
     <div class="col-md-4">
         <div align="center">
-            <a href='@Url.Action("Index", "Home")'>
-                <img src="@Url.Content("~/images/products/"+@product.ImageUrl.Path)" alt="Женская одежда" class="product_Image" />
+            <a href='@Url.Action("ProductVariation", "Catalog",new{productVariationID=product.ProductVariationId})'>
+                <img src="@Url.Content("~/images/products/"+@product.ColorVariation.ImageURLs.FirstOrDefault().Path)" alt="Женская одежда" class="product_Image" />
             </a>
         </div>
-        <p class="product_Name">@product.Name</p>
-        <p class="product_Price">@product.Price</p>
+        <p class="product_Name">@product.BaseProduct.Brand @product.BaseProduct.Name</p>
+        <p class="product_Price">@product.Price грн</p>
     </div>
     }
     }

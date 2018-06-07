@@ -1,0 +1,72 @@
+﻿@using OnlineBoutique.Models.EmunsAndConst
+@model MarketCore.Classes.SizeVariation
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+<table class="table">
+    <thead>
+        <tr>
+            <th>Свойство</th>
+            <th>Размер вещи</th>
+            <th>Ваш размер</th>
+            <th>Оценка</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+
+            for (int i = 0; i < @Model.ListParams.Count; i++)
+            {
+                if (@Model.ListParams[i].UserSize == default(double))
+                {
+                    continue;
+                }
+                if (@Model.ListParams[i].Rating >= 8)
+                {
+                    <tr class="success">
+                        <td>@Model.ListParams[i].TypeSize.GetDisplayName()</td>
+                        <td>@Model.ListParams[i].Value</td>
+                        <td>@Model.ListParams[i].UserSize</td>
+                        <td>@Model.ListParams[i].Rating</td>
+                    </tr>
+                }
+                else if (@Model.ListParams[i].Rating >= 6)
+                {
+                    <tr class="active">
+                        <td>@Model.ListParams[i].TypeSize.GetDisplayName()</td>
+                        <td>@Model.ListParams[i].Value</td>
+                        <td>@Model.ListParams[i].UserSize</td>
+                        <td>@Model.ListParams[i].Rating</td>
+                    </tr>
+                }
+                else if (@Model.ListParams[i].Rating >= 4)
+                {
+                    <tr class="info">
+                        <td>@Model.ListParams[i].TypeSize.GetDisplayName()</td>
+                        <td>@Model.ListParams[i].Value</td>
+                        <td>@Model.ListParams[i].UserSize</td>
+                        <td>@Model.ListParams[i].Rating</td>
+                    </tr>
+                }
+                else if (@Model.ListParams[i].Rating >= 2)
+                {
+                    <tr class="warning">
+                        <td>@Model.ListParams[i].TypeSize.GetDisplayName()</td>
+                        <td>@Model.ListParams[i].Value</td>
+                        <td>@Model.ListParams[i].UserSize</td>
+                        <td>@Model.ListParams[i].Rating</td>
+                    </tr>
+                }
+                else
+                {
+                    <tr class="danger">
+                        <td>@Model.ListParams[i].TypeSize.GetDisplayName()</td>
+                        <td>@Model.ListParams[i].Value</td>
+                        <td>@Model.ListParams[i].UserSize</td>
+                        <td>@Model.ListParams[i].Rating</td>
+                    </tr>
+                }
+            }
+        }
+    </tbody>
+</table>

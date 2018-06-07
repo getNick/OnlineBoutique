@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<a href='@Url.Action("CreateNewProduct", "Catalog")'>
+    Создать новый продукт
+</a>
+<a href='@Url.Action("Index", "Roles")'>
+    Управление ролями
+</a>
+<a href='@Url.Action("UserList", "Roles")'>
+    Список пользователей
+</a>

@@ -57,3 +57,22 @@
     
     margin-left: 10px;
 }
+.image-carousel {
+    height: 400px;
+    width: auto;
+
+}
+.circle{
+    width:20px;
+    height:20px;
+    display:block;
+    border-radius:10px;
+    -moz-border-radius:10px;
+    -webkit-border-radius:10px;
+    -khtml-border-radius:10px;
+    font-size:20px; color:#fff;
+    line-height:20px;
+    text-align:center;
+    background:#000
+ 
+}

@@ -1,0 +1,43 @@
+﻿@model MarketCore.Classes.Order
+@{
+    ViewData["Title"] = "Backet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Ваша корзина</h2>
+@foreach (var item in Model.OrderItems)
+{
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="col-lg-3">
+                    <img style="height: 200px; width: auto;"
+                         src="@Url.Content("~/images/products/"+@item.ProductVariation.ColorVariation.ImageURLs.FirstOrDefault().Path)" />
+                </div>
+                <div class="col-lg-3">
+                    <p>@item.ProductVariation.BaseProduct.Brand @item.ProductVariation.BaseProduct.Name</p>
+                    <p>@item.ProductVariation.Price грн</p>
+                </div>
+                <div class="col-lg-3">
+                    <input type="text" name="count" value="@item.Count" />
+                </div>
+                <div class="col-lg-2">
+                    <p>@{ @item.Sum } грн</p>
+                </div>
+                <div class="col-lg-1">
+                    <div align="right">
+                        <a href="@Url.Action("DeleteFromBacket", "Buying", new {orderItemId = item.OrderItemId})">
+                            <img style="height: 25px; width: 25px;"
+                                 src="@Url.Content("~/images/delete.png")" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+}
+<div>
+    <div class="col-lg-4">
+        <p>Сумма заказа @Model.Sum грн</p>
+    </div>
+    <input type="button" class="btn btn-primary btn-lg" value="Оформить заказ" onclick="location.href='@Url.Action("CheckoutOrder", "Buying",new{OrderId=Model.OrderId})'" />
+    <input type="button" class="btn btn-primary btn-lg" value="Продолжить покупки" onclick="location.href='@Url.Action("Index", "Catalog")'" />
+</div>

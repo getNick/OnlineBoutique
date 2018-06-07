@@ -8,10 +8,10 @@
 
 <form asp-controller="Catalog" asp-action="Upload" method="post" class="dropzone" asp-antiforgery="false"
       enctype="multipart/form-data">
-    <input type="text" name="productVariationId" value="@Model.Id" hidden>
+    <input type="text" name="productVariationId" value="@Model.ProductVariationId" hidden>
 </form>
 <form asp-controller="Catalog" asp-action="NewProductVariation" method="post">
-    <input type="text" name="productVariationId" value="@Model.Id" hidden>
+    <input type="text" name="productVariationId" value="@Model.ProductVariationId" hidden>
     <div class="form-group col-lg-6">
         <label for="usr">Цвет:</label>
         <input type="text" name="color" class="form-control" id="usr">
@@ -29,7 +29,12 @@
     </div>
     <div class="form-group col-lg-4">
         <label for="usr">Обьем грудной клетки:</label>
-        <input type="text" name="breastSize" class="form-control" id="usr">
+        <div class="input-group" id="usr">
+            <span class="input-group-addon">Min</span>
+            <input type="text" name="breastSize" class="form-control">
+            <span class="input-group-addon">Max</span>
+            <input type="text" name="breastMaxSize" class="form-control">
+        </div>
     </div>
     <div class="form-group col-lg-4">
         <label for="usr">Длина рукава:</label>
@@ -37,18 +42,23 @@
     </div>
     <div class="form-group col-lg-4">
         <label for="usr">Обхват бедер:</label>
-        <input type="text" name="girthOfThighsSize" class="form-control" id="usr">
+        <div class="input-group" id="usr">
+            <span class="input-group-addon">Min</span>
+            <input type="text" name="girthOfThighsSize" class="form-control">
+            <span class="input-group-addon">Max</span>
+            <input type="text" name="girthOfThighsMaxSize" class="form-control">
+        </div>
     </div>
     <div class="form-group col-lg-4">
         <label for="usr">Длина изделия:</label>
         <input type="text" name="height" class="form-control" id="usr">
     </div>
     <div class="form-group col-lg-4">
-        <label for="usr">Обьем бёдер:</label>
+        <label for="usr">Бедра:</label>
         <input type="text" name="hipsSize" class="form-control" id="usr">
     </div>
     <div class="form-group col-lg-4">
-        <label for="usr">Обьем талии:</label>
+        <label for="usr">Taлия:</label>
         <input type="text" name="waistSize" class="form-control" id="usr">
     </div>
     <div class="form-group col-lg-4">
