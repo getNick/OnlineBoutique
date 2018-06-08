@@ -5,8 +5,11 @@
 }
 
 <h2>Ваша корзина</h2>
-@foreach (var item in Model.OrderItems)
+
+@if (Model != null)
 {
+    foreach (var item in Model.OrderItems)
+    {
         <div class="panel panel-default">
             <div class="panel-body">
                 <div class="col-lg-3">
@@ -33,11 +36,29 @@
                 </div>
             </div>
         </div>
+    }
+
+
+
 }
 <div>
     <div class="col-lg-4">
-        <p>Сумма заказа @Model.Sum грн</p>
+        @if (Model == null)
+        {
+            <div align="center">
+                <p style="font-size: 24px">Корзина пуста!</p>
+            </div>
+        }
+        else
+        {
+            <p>Сумма заказа @Model.Sum грн</p>
+        }
+
     </div>
-    <input type="button" class="btn btn-primary btn-lg" value="Оформить заказ" onclick="location.href='@Url.Action("CheckoutOrder", "Buying",new{OrderId=Model.OrderId})'" />
+    @if (Model != null)
+    {
+        <input type="button" class="btn btn-primary btn-lg" value="Оформить заказ" onclick="location.href='@Url.Action("CheckoutOrder", "Buying",new{OrderId=Model.OrderId})'" />
+    }
+
     <input type="button" class="btn btn-primary btn-lg" value="Продолжить покупки" onclick="location.href='@Url.Action("Index", "Catalog")'" />
 </div>

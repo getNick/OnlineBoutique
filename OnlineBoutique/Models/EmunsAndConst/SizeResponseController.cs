@@ -33,7 +33,7 @@ namespace OnlineBoutique.Models.EmunsAndConst
             return "Размер вам не подходит.";
         }
 
-        private static double CalculateRating(double size,double value, double boundValue)
+        public static double CalculateRating(double size,double value, double boundValue)
         {
             double rating = ((Math.Abs(size - value)) / Math.Abs(boundValue - value));
             if ((rating < 0) | (rating > 1))
@@ -45,10 +45,10 @@ namespace OnlineBoutique.Models.EmunsAndConst
 
         public static ProductVariation CalculateRating(ProductVariation pv, UserSizes user)
         {
-            foreach (var SizeVariation in pv.SizeVariation)
+            foreach (var sizeVariation in pv.SizeVariation)
             {
                 double arrange = 0;
-                foreach (var size in SizeVariation.ListParams)
+                foreach (var size in sizeVariation.ListParams)
                 {
                     switch (size.TypeSize)
                     {
@@ -123,8 +123,8 @@ namespace OnlineBoutique.Models.EmunsAndConst
                 }
 
                 arrange /= 4.0;
-                SizeVariation.Rating = arrange;
-                SizeVariation.SizeResponse = SizeResponseController.GetResponse(arrange);
+                sizeVariation.Rating = arrange;
+                sizeVariation.SizeResponse = SizeResponseController.GetResponse(arrange);
             }
 
             return pv;

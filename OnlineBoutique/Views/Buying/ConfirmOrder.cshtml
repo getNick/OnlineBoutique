@@ -1,0 +1,8 @@
+﻿
+@{
+    ViewData["Title"] = "ConfirmOrder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Ваш заказ принят,вскоре вам перезвонят для уточнения информации</h2>
+<input type="button" class="btn btn-primary btn-lg" value="Продолжить покупки" onclick="location.href='@Url.Action("Index", "Catalog")'" />

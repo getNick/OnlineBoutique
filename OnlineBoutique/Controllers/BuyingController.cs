@@ -42,6 +42,7 @@ namespace OnlineBoutique.Controllers
                 ThenInclude(x => x.ProductVariation).ThenInclude(x => x.BaseProduct).Include(x => x.OrderItems).
                 ThenInclude(x => x.ProductVariation).ThenInclude(x => x.ColorVariation).
                 ThenInclude(x => x.ImageURLs).FirstOrDefault(x => (x.Customer.Id == user.Id) & (x.OrderStatus == OrderStatusEnum.Basket));
+            if(activeBacket==null) return View(activeBacket);
             for (int i = 0; i < activeBacket.OrderItems.Count; i++)
             {
                 activeBacket.OrderItems[i].Sum =
@@ -114,9 +115,22 @@ namespace OnlineBoutique.Controllers
 
             activeBacket.Sum = activeBacket.OrderItems.Sum(x => x.Sum);
             activeBacket.OrderStatus = OrderStatusEnum.WaitConfirm;
+            db.Orders.Update(activeBacket);
+            db.SaveChanges();
             var userId = _userManager.GetUserId(HttpContext.User);
             var user = db.Users.Include(x => x.UserSizes).FirstOrDefault(x => x.Id == userId);
             return View(user);
+        }
+
+        public IActionResult ConfirmOrder(string fio=null,string telNumber=null,string adress=null)
+        {
+            var userId = _userManager.GetUserId(HttpContext.User);
+            var user = db.Users.Include(x => x.UserSizes).FirstOrDefault(x => x.Id == userId);
+            user.PhoneNumber = telNumber;
+            user.UserName = fio;
+            user.NormalizedUserName = fio.ToUpper();
+            db.Users.Update(user);
+            return View();
         }
     }
 }

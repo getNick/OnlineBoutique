@@ -39,7 +39,7 @@ namespace OnlineBoutique.Controllers
         public IActionResult Index()
         {
             var list = db.Products.Include(x=>x.Category).ToList();
-            var productVariations = db.ProductVariations.Include(x => x.ColorVariation).ThenInclude(x => x.ImageURLs).ToList();
+            var productVariations = db.ProductVariations.Include(x=>x.BaseProduct).Include(x => x.ColorVariation).ThenInclude(x => x.ImageURLs).ToList();
            
             return View(productVariations);
         }
